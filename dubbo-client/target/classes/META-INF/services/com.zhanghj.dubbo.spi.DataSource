@@ -1,0 +1,2 @@
+com.zhanghj.dubbo.spi.impl.MysqlDataSource
+com.zhanghj.dubbo.spi.impl.OracleDataSource

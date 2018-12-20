@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <dubbo:application name="consumer"/>
+    <!--file 属性是缓存服务的地址 文件名为dubbo-server 不配置也是有的  默认路径在主用户目录下的.dubbo 文件下-->
+    <dubbo:registry address="zookeeper://192.168.0.113:2181" file="e:/dubbo-server"/>
+    <dubbo:reference id="demoService"
+                     interface="com.zhanghj.dubbo.service.DemoService"
+                    version="1.0.1"  protocol="hessian" mock="com.zhanghj.dubbo.service.ConsumerService"
+         timeout="1000">
+     <!--protocol="hessian" 主要目的是支持多协议 从多个协议中选一个出来  或者指定一个-->
+    </dubbo:reference>
+</beans>

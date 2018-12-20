@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <dubbo:application name="provider"/>
+    <dubbo:registry  address="zookeeper://192.168.0.108:2181" id="zk1"/>
+    <dubbo:protocol name="dubbo" port="20880"/>
+    <dubbo:protocol name="hessian" port="8088"  /> <!--host="192.168.0.119"-->
+    <dubbo:service  ref="demoService"
+                    interface="com.zhanghj.dubbo.service.DemoService"
+                    protocol="dubbo,hessian" version="1.0.0" >
+
+    </dubbo:service>
+   <dubbo:provider delay="0"/>
+
+    <dubbo:service  ref="demoService2"
+                    interface="com.zhanghj.dubbo.service.DemoService"
+                    protocol="dubbo,hessian" version="1.0.1" >
+
+    </dubbo:service>
+
+    <dubbo:service  ref="helloService"
+                    interface="com.zhanghj.dubbo.service.HelloService"
+                    protocol="dubbo" registry="zk1" version="1.0.0">
+
+    </dubbo:service>
+
+    <dubbo:service  ref="helloService213"
+                    interface="com.zhanghj.dubbo.service.HelloService"
+                    protocol="dubbo" registry="zk1" version="1.0.1">
+
+    </dubbo:service>
+
+    <bean id="demoService" class="com.zhanghj.dubbo.service.impl.DubboServiceImpl" />
+    <bean id="demoService2" class="com.zhanghj.dubbo.service.impl.DubboServiceImpl2" />
+    <bean id="helloService" class="com.zhanghj.dubbo.service.impl.HelloServiceImpl" />
+    <bean id="helloService213" class="com.zhanghj.dubbo.service.impl.HelloServiceImpl2" />
+
+</beans>
